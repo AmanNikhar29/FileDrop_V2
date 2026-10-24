@@ -1,0 +1,36 @@
+services:
+  filedrop:
+    build: .
+    container_name: filedrop-app
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      UPLOAD_DIR: /data/uploads
+      DB_NAME: filedrop
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD_URI}@db:27017/filedrop?authSource=admin
+    volumes:
+      - filedrop_data:/data/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mongo:8.0
+    container_name: filedrop-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-filedrop_admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-ChangeThisLocalPassword123}
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet -u \"$$MONGO_INITDB_ROOT_USERNAME\" -p \"$$MONGO_INITDB_ROOT_PASSWORD\" --authenticationDatabase admin --eval \"db.adminCommand('ping').ok\" | grep -q 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  filedrop_data:
+  mongodb_data:

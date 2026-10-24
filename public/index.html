@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151f">
+  <title>FileDrop — Simple file space</title>
+  <link rel="stylesheet" href="/style.css?v=2">
+  <script src="/app.js?v=2" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="FileDrop home"><span class="brand-mark">F</span><span>filedrop<span class="brand-period">.</span></span></a>
+      <div class="top-right"><span class="secure-dot"></span><span>LOCAL STORAGE</span><span class="divider"></span><span class="docker-label">DOCKER POWERED</span></div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL FILE SPACE</div>
+        <h1>Files in.<br><span>Fuss out.</span></h1>
+        <p>A simple little space to drop your files, keep them organized, and download them whenever you need.</p>
+        <div class="hero-tags"><span>↗ Easy uploads</span><span>◈ Persistent storage</span><span>↓ Quick downloads</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="file-tile tile-back"><span>PDF</span><i></i><i></i></div>
+        <div class="file-tile tile-front"><div class="tile-fold"></div><span class="tile-type">FILE</span><div class="tile-lines"><i></i><i></i><i></i></div></div>
+        <div class="float-chip chip-top">↗ &nbsp; UPLOAD READY</div><div class="float-chip chip-bottom"><span>●</span> SAVED SAFELY</div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <section class="upload-card">
+        <div class="card-heading"><div><span class="section-kicker">01 / ADD FILES</span><h2>Drop it like it's hot.</h2><p>Choose files from your device or drag them into the area.</p></div><span class="upload-symbol">↑</span></div>
+        <form id="upload-form">
+          <input id="file-input" type="file" multiple hidden>
+          <div id="drop-zone" class="drop-zone" tabindex="0" role="button" aria-label="Choose files or drag files here">
+            <div class="upload-illustration"><span class="cloud">☁</span><span class="upload-arrow">↑</span></div>
+            <strong>Drag & drop your files here</strong>
+            <span class="drop-sub">or <button type="button" id="browse-button" class="text-button">browse files</button> from your computer</span>
+            <span class="drop-limit">UP TO 5 FILES AT ONCE · 10 MB PER FILE</span>
+          </div>
+          <div id="selected-files" class="selected-files" hidden></div>
+          <div class="upload-bottom"><span id="upload-message" role="status" aria-live="polite">Your files stay on this machine.</span><button id="upload-button" class="primary-button" type="submit" disabled>Upload files <span>↗</span></button></div>
+        </form>
+      </section>
+
+      <section class="files-card">
+        <div class="files-header">
+          <div><span class="section-kicker">02 / YOUR LIBRARY</span><h2>Saved files <span id="file-count" class="count-badge">0</span></h2></div>
+          <button id="refresh-button" class="icon-button" type="button" aria-label="Refresh files">↻</button>
+        </div>
+        <div class="storage-strip">
+          <div class="storage-copy"><span>SPACE IN USE</span><strong id="storage-used">0 B</strong></div>
+          <div class="storage-bar"><span id="storage-bar-fill"></span></div>
+          <div class="storage-foot"><span>Stored in your Docker volume</span><span id="storage-percent">0%</span></div>
+        </div>
+        <div class="library-toolbar"><span>ALL FILES <span id="all-files-count">0</span></span><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search files…" aria-label="Search files"></label></div>
+        <div id="file-list" class="file-list"><div class="empty-state"><span class="empty-icon">↥</span><strong>Your space is waiting.</strong><p>Upload your first file to see it here.</p></div></div>
+        <div class="library-footer"><span><i class="status-dot"></i> <span id="connection-status">Connecting to FileDrop…</span></span><span>A LITTLE SPACE, JUST FOR YOU.</span></div>
+      </section>
+    </section>
+    <footer class="page-footer"><span>FILEDROP <b>V1.0</b></span><span>BUILT WITH NODE.JS · DOCKER · PERSISTENT VOLUMES</span></footer>
+  </main>
+</body>
+</html>
